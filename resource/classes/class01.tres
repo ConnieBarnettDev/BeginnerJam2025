@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ClassResource" load_steps=3 format=3 uid="uid://dtw0o8qbpb0ey"]
+
+[ext_resource type="Script" uid="uid://cy0cofwiruowv" path="res://resource/ClassResource.cs" id="1_sbqec"]
+[ext_resource type="Texture2D" uid="uid://b6x85guuvdg4d" path="res://icon.svg" id="1_x2r6u"]
+
+[resource]
+script = ExtResource("1_sbqec")
+name = "Class 1"
+description = "This is the first class"
+image = ExtResource("1_x2r6u")
+color = Color(0, 0.501961, 0, 1)
+metadata/_custom_type_script = "uid://cy0cofwiruowv"

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d18rhr188fppb"]
+
+[ext_resource type="Script" uid="uid://b53fs7jued45x" path="res://scenes/autoload/LevelManager.cs" id="1_jnhuu"]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource("1_jnhuu")
+mainMenuScenePath = "uid://v6vit5xtyov0"
+gameScenePath = "uid://bs2e5b6oqj7gv"

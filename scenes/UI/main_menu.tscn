@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://v6vit5xtyov0"]
+
+[ext_resource type="Script" uid="uid://bnxs2uurb8gap" path="res://scenes/UI/MainMenu.cs" id="1_qwnig"]
+[ext_resource type="PackedScene" uid="uid://dg1khhi6dfskt" path="res://scenes/UI/options_menu.tscn" id="2_yonvy"]
+[ext_resource type="PackedScene" uid="uid://bfh1aqnfnn5jl" path="res://scenes/UI/level_select_menu.tscn" id="3_5jstl"]
+[ext_resource type="PackedScene" uid="uid://bgxxa2frs5vjq" path="res://scenes/UI/credits.tscn" id="4_tfcbk"]
+[ext_resource type="Theme" uid="uid://cbtheass4g4wi" path="res://resource/default_theme.tres" id="5_e2p27"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_qwnig")
+optionsMenuScene = ExtResource("2_yonvy")
+levelSelectMenuScene = ExtResource("3_5jstl")
+creditsScene = ExtResource("4_tfcbk")
+
+[node name="MainMenuContainer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="VboxContainer" type="VBoxContainer" parent="MainMenuContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -92.0
+offset_right = 51.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TitleLabel" type="Label" parent="MainMenuContainer/VboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "TITLE"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenuContainer/VboxContainer"]
+layout_mode = 2
+theme = ExtResource("5_e2p27")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuContainer/VboxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuContainer/VboxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="MainMenuContainer/VboxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="MainMenuContainer/VboxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="MainMenuContainer/VboxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Credits
+"
+
+[node name="QuitButton" type="Button" parent="MainMenuContainer/VboxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"

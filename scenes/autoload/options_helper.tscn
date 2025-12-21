@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bflmiy8bav5rw"]
+
+[ext_resource type="Script" uid="uid://bfvd46ql6gm2n" path="res://scenes/autoload/OptionsHelper.cs" id="1_m6klm"]
+
+[node name="OptionsHelper" type="Node"]
+script = ExtResource("1_m6klm")

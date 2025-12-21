@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://coqvtxnsjvq7y"]
+
+[ext_resource type="Script" uid="uid://c3b4rdpdax6qn" path="res://scenes/UI/PauseMenu.cs" id="1_qo2fb"]
+[ext_resource type="PackedScene" uid="uid://dg1khhi6dfskt" path="res://scenes/UI/options_menu.tscn" id="2_bl585"]
+[ext_resource type="Theme" uid="uid://cbtheass4g4wi" path="res://resource/default_theme.tres" id="3_mko1u"]
+
+[node name="PauseMenu" type="Node" node_paths=PackedStringArray("pauseMenuContainer") groups=["Pause"]]
+script = ExtResource("1_qo2fb")
+optionsMenuScene = ExtResource("2_bl585")
+pauseMenuContainer = NodePath("PauseMenuCanvasLayer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="PauseMenuCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuCanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -102.0
+offset_right = 64.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuCanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_mko1u")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ResumeButton" type="Button" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="MainMenuButton" type="Button" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="QuitButton" type="Button" parent="PauseMenuCanvasLayer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit
+"

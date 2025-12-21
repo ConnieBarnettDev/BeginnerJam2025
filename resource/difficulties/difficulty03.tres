@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DifficultyResource" load_steps=3 format=3 uid="uid://g44qhyobv5sh"]
+
+[ext_resource type="Script" uid="uid://diqs8rxylx4mb" path="res://resource/DifficultyResource.cs" id="1_f3mql"]
+[ext_resource type="Texture2D" uid="uid://b6x85guuvdg4d" path="res://icon.svg" id="1_lv0cv"]
+
+[resource]
+script = ExtResource("1_f3mql")
+name = "Difficulty 3"
+description = "description for difficulty 3"
+image = ExtResource("1_lv0cv")
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://diqs8rxylx4mb"

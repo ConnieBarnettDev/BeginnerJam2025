@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://beb5ciy4k7v47"]
+
+[ext_resource type="Script" uid="uid://rwl8t0nkhbap" path="res://scenes/autoload/AudioHelper.cs" id="1_cr1v0"]
+[ext_resource type="AudioStream" uid="uid://cks1qu6u4vr8c" path="res://assets/audio/click.mp3" id="2_h2ov4"]
+[ext_resource type="AudioStream" uid="uid://hpuaw4kfrm6x" path="res://assets/audio/music.mp3" id="3_cr1v0"]
+
+[node name="AudioHelper" type="Node"]
+script = ExtResource("1_cr1v0")
+
+[node name="ClickAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_h2ov4")
+bus = &"SFX"
+
+[node name="MusicAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cr1v0")
+autoplay = true
+bus = &"Music"
