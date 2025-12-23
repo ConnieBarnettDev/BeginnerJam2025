@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqlad550ue4k8"
-path="res://.godot/imported/wand.png-f04a1cded16047ea76432534713a282c.ctex"
+uid="uid://bcjv0p3qypg8m"
+path="res://.godot/imported/_indoor_tiles.png-0093cc81b8e79d76ae57122233a55812.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/wand.png"
-dest_files=["res://.godot/imported/wand.png-f04a1cded16047ea76432534713a282c.ctex"]
+source_file="res://assets/sprites/_indoor_tiles.png"
+dest_files=["res://.godot/imported/_indoor_tiles.png-0093cc81b8e79d76ae57122233a55812.ctex"]
 
 [params]
 

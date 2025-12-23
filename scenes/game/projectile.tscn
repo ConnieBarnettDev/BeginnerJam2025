@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bl4c512kf5g1k"]
+[gd_scene load_steps=4 format=3 uid="uid://bl4c512kf5g1k"]
 
 [ext_resource type="Texture2D" uid="uid://bagnknqw4ks7h" path="res://assets/sprites/cheese.png" id="1_gs15w"]
+[ext_resource type="Script" uid="uid://c3lysbuj8k83a" path="res://scenes/game/Projectile.cs" id="1_u1cto"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u1cto"]
 radius = 6.0
@@ -9,6 +10,9 @@ radius = 6.0
 collision_layer = 2
 collision_mask = 2
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_u1cto")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

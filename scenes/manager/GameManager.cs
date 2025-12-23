@@ -6,6 +6,17 @@ namespace Game.Manager;
 
 public partial class GameManager : Node
 {
+
+	private static GameManager Instance;
+
+	public override void _Notification(int what)
+	{
+		if (what == NotificationSceneInstantiated)
+		{
+			Instance = this;
+		}
+	}
+
 	private readonly StringName ACTION_PAUSE = "pause";
 
 	[Export]
@@ -17,6 +28,7 @@ public partial class GameManager : Node
 	private string className;
 	private string difficultyName;
 	private string currentRunText;
+	public static bool isPaused { get; private set; } = false;
 
 	public override void _Ready()
 	{
@@ -51,6 +63,8 @@ public partial class GameManager : Node
 		if (evt.IsActionPressed(ACTION_PAUSE))
 		{
 			Node currentPauseMenu = GetTree().GetFirstNodeInGroup("Pause");
+			Engine.TimeScale = 0;
+			isPaused = true;
 			
 			if (currentPauseMenu != null)
 			{
@@ -72,6 +86,8 @@ public partial class GameManager : Node
 	private void OnPauseMenuResumePressed(PauseMenu pauseMenu)
 	{
 		pauseMenu.QueueFree();
+		Engine.TimeScale = 1;
+		isPaused = false;
 	}
 
 	private void OnTextEditTextChanged()
