@@ -1,7 +1,6 @@
 using Godot;
 using Game.UI;
 using Game.Autoload;
-using System;
 
 namespace Game.Manager;
 
@@ -86,7 +85,9 @@ public partial class GameManager : Node
 
 	public override void _Process(double delta)
 	{
-		//Gameplay
+		/*
+			This is where the magic happens B)
+		*/
 	}
 
 

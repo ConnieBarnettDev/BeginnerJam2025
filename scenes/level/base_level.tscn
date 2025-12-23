@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs2e5b6oqj7gv"]
+[gd_scene load_steps=3 format=3 uid="uid://bs2e5b6oqj7gv"]
 
 [ext_resource type="PackedScene" uid="uid://cs1pk5oa7lwuh" path="res://scenes/manager/game_manager.tscn" id="1_ebx1s"]
+[ext_resource type="PackedScene" uid="uid://cut8s410rxesy" path="res://scenes/game/player.tscn" id="2_upopr"]
 
 [node name="BaseLevel" type="Node2D"]
 
 [node name="GameManager" parent="." instance=ExtResource("1_ebx1s")]
+
+[node name="Player" parent="." instance=ExtResource("2_upopr")]
+position = Vector2(605.99994, 358.99997)

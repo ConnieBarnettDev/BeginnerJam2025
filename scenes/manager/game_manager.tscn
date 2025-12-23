@@ -11,6 +11,7 @@ pauseMenuScene = ExtResource("2_l78bi")
 [node name="GameUI" type="CanvasLayer" parent="."]
 
 [node name="PanelContainer" type="PanelContainer" parent="GameUI"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

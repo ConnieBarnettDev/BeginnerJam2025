@@ -4,6 +4,11 @@ using Newtonsoft.Json;
 
 namespace Game.Autoload;
 
+/*
+	Will need to change the structure of save obj to match
+	the new game
+*/
+
 public partial class LevelManager : Node
 {
 	private static readonly string SAVE_FILE_PATH = "user://save.json";

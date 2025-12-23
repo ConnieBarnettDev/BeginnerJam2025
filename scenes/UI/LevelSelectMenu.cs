@@ -5,9 +5,10 @@ using System.Collections.Generic;
 namespace Game.UI;
 
 /*
-	NOTES:
-	-Probably will need a seperate "Classes and Difficulties" manager
-	-Need to display in the UI what is the "current run" if there is one
+	Ilikely will have to delete this file but I want to keep the
+	"new run" and "continue" functionality
+
+	maybe I should add new run and continue to Main menu instead
 */
 
 public partial class LevelSelectMenu : CanvasLayer
