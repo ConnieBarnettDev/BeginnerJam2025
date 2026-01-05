@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://beb5ciy4k7v47"]
+[gd_scene load_steps=6 format=3 uid="uid://beb5ciy4k7v47"]
 
 [ext_resource type="Script" uid="uid://rwl8t0nkhbap" path="res://scenes/autoload/AudioHelper.cs" id="1_cr1v0"]
 [ext_resource type="AudioStream" uid="uid://cks1qu6u4vr8c" path="res://assets/audio/click.mp3" id="2_h2ov4"]
 [ext_resource type="AudioStream" uid="uid://hpuaw4kfrm6x" path="res://assets/audio/music.mp3" id="3_cr1v0"]
+[ext_resource type="AudioStream" uid="uid://cnj4bcxx4wi3r" path="res://assets/audio/laser_1.wav" id="4_h2ov4"]
+[ext_resource type="AudioStream" uid="uid://cvb7hf2i3qf1p" path="res://assets/audio/footsteps-boots-101657.wav" id="5_n3qos"]
 
 [node name="AudioHelper" type="Node"]
 script = ExtResource("1_cr1v0")
@@ -15,3 +17,18 @@ bus = &"SFX"
 stream = ExtResource("3_cr1v0")
 autoplay = true
 bus = &"Music"
+
+[node name="ShootAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_h2ov4")
+volume_db = -6.058
+pitch_scale = 0.38
+bus = &"SFX"
+
+[node name="HitAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -6.058
+bus = &"SFX"
+
+[node name="FootstepAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_n3qos")
+volume_db = -7.068
+pitch_scale = 0.69

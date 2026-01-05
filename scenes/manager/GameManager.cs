@@ -1,12 +1,12 @@
 using Godot;
 using Game.UI;
 using Game.Autoload;
+using Game.Resources;
 
 namespace Game.Manager;
 
 public partial class GameManager : Node
 {
-
 	private static GameManager Instance;
 
 	public override void _Notification(int what)
@@ -22,39 +22,26 @@ public partial class GameManager : Node
 	[Export]
 	private PackedScene pauseMenuScene;
 
-	private Label gameLabel;
-	private TextEdit textEdit;
-
+	// Probably cutting this out
 	private string className;
 	private string difficultyName;
 	private string currentRunText;
+
+
+	
+	//Ammo
 	public static bool isPaused { get; private set; } = false;
+	public static PackedScene ammoScene = GD.Load<PackedScene>("res://scenes/game/ammo/ammo.tscn");
+	public static Texture2D ammoSprite;
+	public static int ammoSpeed { get; private set; } = 500;
 
 	public override void _Ready()
 	{
-		gameLabel = GetNode<Label>("%GameLabel");
-		textEdit = GetNode<TextEdit>("%TextEdit");
-
-		textEdit.TextChanged += OnTextEditTextChanged;
-
 		className = LevelManager.currentClass.name;
 		difficultyName = LevelManager.currentDifficulty.name;
 
 		ApplyLevelSelectData();
 		ApplySaveData();
-	}
-
-	private void ApplyLevelSelectData()
-	{
-		gameLabel.Text = "Class: " + className + "\n" + "Difficulty: " + difficultyName;
-	}
-
-	private void ApplySaveData()
-	{
-		if (LevelManager.saveData != null)
-		{
-			textEdit.Text = LevelManager.saveData.text;
-		}
 	}
 
 	public override void _UnhandledInput(InputEvent evt)
@@ -68,7 +55,6 @@ public partial class GameManager : Node
 			
 			if (currentPauseMenu != null)
 			{
-
 				OnPauseMenuResumePressed(GetNode<PauseMenu>("PauseMenu"));
 			}
 			else
@@ -83,6 +69,51 @@ public partial class GameManager : Node
 		}
 	}
 
+	public override void _Process(double delta)
+	{
+		/*
+			This is where the magic happens B)
+		*/
+	}
+
+	public static void ChangeAmmoSprite(Texture2D newSprite)
+	{
+		ammoSprite = newSprite;
+	}
+
+	public static void FireAmmo(CharacterBody2D player)
+	{
+		if(ammoSprite == null) 
+		{ 
+			GD.Print("Out of ammo!");
+			return; 
+		}
+
+		Ammo ammoInstance = ammoScene.Instantiate<Ammo>();
+		//Order of operations stop an error
+		player.GetTree().Root.AddChild(ammoInstance);
+		ammoInstance.sprite.Texture = ammoSprite;
+		ammoInstance.Position = player.Position;
+		ammoInstance.LookAt(player.GetGlobalMousePosition());
+		ammoInstance.ApplyImpulse( 
+			new Vector2(ammoSpeed, 0).Rotated(ammoInstance.Rotation)
+		);
+		AudioHelper.PlayShoot();
+	}
+
+	private void ApplyLevelSelectData()
+	{
+		//level select
+	}
+
+	private void ApplySaveData()
+	{
+		if (LevelManager.saveData != null)
+		{
+			//save data
+		}
+	}
+
 	private void OnPauseMenuResumePressed(PauseMenu pauseMenu)
 	{
 		pauseMenu.QueueFree();
@@ -93,17 +124,10 @@ public partial class GameManager : Node
 	private void OnTextEditTextChanged()
 	{
 		LevelManager.WriteSaveData(new SaveData(
-			textEdit.Text,
+			"temp",
 			LevelManager.currentClass,
 			LevelManager.currentDifficulty
 		));
-	}
-
-	public override void _Process(double delta)
-	{
-		/*
-			This is where the magic happens B)
-		*/
 	}
 
 

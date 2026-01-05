@@ -1,11 +1,11 @@
-using System;
+using Game.Autoload;
 using Godot;
 
 namespace Game;
 
-public partial class Projectile : RigidBody2D
+public partial class Ammo : RigidBody2D
 {
-	private Sprite2D sprite;
+	public Sprite2D sprite;
 	public override void _Ready()
 	{
 		sprite = GetNode<Sprite2D>("Sprite2D");
@@ -13,15 +13,10 @@ public partial class Projectile : RigidBody2D
 		BodyEntered += OnBodyEntered;
 	}
 
-
-    public void ChangeSprite(Texture2D newSprite)
-	{
-		sprite.Texture = newSprite;
-	}
-
     private void OnBodyEntered(Node body)
     {
-		//hit effect
+		//tell GM to play hit scene
+		AudioHelper.PlayHit();
 		QueueFree();
     }
 

@@ -1,22 +1,23 @@
 using Game.Manager;
+using Game.Autoload;
 using Godot;
+using System;
 
 namespace Game.Player;
 
 public partial class Player : CharacterBody2D
 {
-	[Export]
-	private PackedScene projectileScene;
-	const int PROJECTILE_SPEED = 500;
 	private AnimatedSprite2D sprite;
 	private Sprite2D shooter;
+	private Area2D hitBox;
 	private int counter = 0;
-	public int playerSpeed = 200;
-	public int fireRate = 5;
+	private int playerSpeed = 200;
+	private int fireRate = 5;
 	public override void _Ready()
 	{
 		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		shooter = GetNode<Sprite2D>("Shooter");
+		hitBox = GetNode<Area2D>("HitBox");
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -44,6 +45,15 @@ public partial class Player : CharacterBody2D
 				break;
 		}
 
+		if (direction != Vector2.Zero)
+		{
+			AudioHelper.PlayFootsteps();
+		}
+		else
+		{
+			AudioHelper.StopFootsteps();
+		}
+
 		if(!GameManager.isPaused)
 		{
 			shooter.LookAt(GetGlobalMousePosition());
@@ -53,28 +63,25 @@ public partial class Player : CharacterBody2D
 		{
 			if(counter == 0)
 			{
-				FireProjectile();
+				GameManager.FireAmmo(this);
 				counter = fireRate;
 			}
 			else
 			{
 				counter--;
 			}
-			
 		}
     }
 
-	public void FireProjectile()
-	{
-		Projectile projectileInstance = projectileScene.Instantiate<Projectile>();
-		//projectileInstance.ChangeSprite();
-		projectileInstance.Position = Position;
-		projectileInstance.LookAt(GetGlobalMousePosition());
-		projectileInstance.ApplyImpulse( 
-			new Vector2(PROJECTILE_SPEED, 0).Rotated(projectileInstance.Rotation)
-		);
-		GetTree().Root.AddChild(projectileInstance);
 
+	public void ChangeFireRate(int newRate)
+	{
+		fireRate = newRate;
+	}
+
+	public void ChangeSpeed(int newSpeed)
+	{
+		playerSpeed = newSpeed;
 	}
 
 }

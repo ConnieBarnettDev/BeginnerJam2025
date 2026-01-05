@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl4c512kf5g1k"]
+
+[ext_resource type="Script" uid="uid://c3lysbuj8k83a" path="res://scenes/game/ammo/Ammo.cs" id="1_3w2dh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u1cto"]
+radius = 6.0
+
+[node name="Ammo" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_3w2dh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u1cto")
