@@ -1,7 +1,6 @@
 using Godot;
 using Game.UI;
 using Game.Autoload;
-using Game.Resources;
 
 namespace Game.Manager;
 
@@ -22,24 +21,31 @@ public partial class GameManager : Node
 	[Export]
 	private PackedScene pauseMenuScene;
 
-	// Probably cutting this out
+	// TO REMOVE
 	private string className;
 	private string difficultyName;
 	private string currentRunText;
 
+	//UI
+	private static ProgressBar healthbar;
+	private static TextureRect ammoTextureRect;
 
 	
 	//Ammo
 	public static bool isPaused { get; private set; } = false;
 	public static PackedScene ammoScene = GD.Load<PackedScene>("res://scenes/game/ammo/ammo.tscn");
+	public static PackedScene explosionScene = GD.Load<PackedScene>("res://scenes/game/ammo/explosion.tscn");
 	public static Texture2D ammoSprite;
 	public static int ammoSpeed { get; private set; } = 500;
 
 	public override void _Ready()
 	{
+		healthbar = GetNode<ProgressBar>("%HealthBar");
+		ammoTextureRect = GetNode<TextureRect>("%AmmoTextureRect");
+
+		//TO REMOVE
 		className = LevelManager.currentClass.name;
 		difficultyName = LevelManager.currentDifficulty.name;
-
 		ApplyLevelSelectData();
 		ApplySaveData();
 	}
@@ -69,28 +75,21 @@ public partial class GameManager : Node
 		}
 	}
 
-	public override void _Process(double delta)
-	{
-		/*
-			This is where the magic happens B)
-		*/
-	}
-
 	public static void ChangeAmmoSprite(Texture2D newSprite)
 	{
 		ammoSprite = newSprite;
+		ammoTextureRect.Texture = newSprite;
 	}
 
 	public static void FireAmmo(CharacterBody2D player)
 	{
 		if(ammoSprite == null) 
 		{ 
-			GD.Print("Out of ammo!");
+			GD.Print("Out of ammo!"); //TODO: in-game message
 			return; 
 		}
 
 		Ammo ammoInstance = ammoScene.Instantiate<Ammo>();
-		//Order of operations stop an error
 		player.GetTree().Root.AddChild(ammoInstance);
 		ammoInstance.sprite.Texture = ammoSprite;
 		ammoInstance.Position = player.Position;
@@ -100,6 +99,25 @@ public partial class GameManager : Node
 		);
 		AudioHelper.PlayShoot();
 	}
+
+	public static void ExplodeAmmo(Ammo ammo)
+	{
+		Node2D explosionInstance = explosionScene.Instantiate<Node2D>();
+		ammo.GetTree().Root.AddChild(explosionInstance);
+		explosionInstance.Position = ammo.Position;
+	}
+
+	private void OnPauseMenuResumePressed(PauseMenu pauseMenu)
+	{
+		pauseMenu.QueueFree();
+		Engine.TimeScale = 1;
+		isPaused = false;
+	}
+
+
+
+
+	//TO REMOVE
 
 	private void ApplyLevelSelectData()
 	{
@@ -114,12 +132,6 @@ public partial class GameManager : Node
 		}
 	}
 
-	private void OnPauseMenuResumePressed(PauseMenu pauseMenu)
-	{
-		pauseMenu.QueueFree();
-		Engine.TimeScale = 1;
-		isPaused = false;
-	}
 
 	private void OnTextEditTextChanged()
 	{

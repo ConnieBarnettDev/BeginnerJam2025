@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://bohxvg61qqju3"]
+
+[ext_resource type="Texture2D" uid="uid://1yiaruanva07" path="res://assets/sprites/pow_1.png" id="1_8th1w"]
+[ext_resource type="Texture2D" uid="uid://cmjiuowdbhfyu" path="res://assets/sprites/pow_2.png" id="2_me3oa"]
+[ext_resource type="Texture2D" uid="uid://cu4atvckjccol" path="res://assets/sprites/pow_3.png" id="3_yp3to"]
+
+[sub_resource type="Animation" id="Animation_fdvm1"]
+resource_name = "explode"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k37x2"]
+_data = {
+&"explode": SubResource("Animation_fdvm1")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2k4em"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8th1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_me3oa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yp3to")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}]
+
+[node name="Explosion" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_k37x2")
+}
+autoplay = "explode"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2k4em")
+animation = &"explode"
+autoplay = "explode"

@@ -1,4 +1,5 @@
 using Game.Autoload;
+using Game.Manager;
 using Godot;
 
 namespace Game;
@@ -15,7 +16,7 @@ public partial class Ammo : RigidBody2D
 
     private void OnBodyEntered(Node body)
     {
-		//tell GM to play hit scene
+		GameManager.ExplodeAmmo(this);
 		AudioHelper.PlayHit();
 		QueueFree();
     }
