@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AmmoResource" load_steps=3 format=3 uid="uid://c3msu0v73apmd"]
+
+[ext_resource type="Texture2D" uid="uid://vh8wnh7a6d6b" path="res://assets/sprites/ammo/blueberry.png" id="1_i5mu0"]
+[ext_resource type="Script" uid="uid://bl76tqpf01ejt" path="res://resource/ammo/AmmoResource.cs" id="2_mj1jq"]
+
+[resource]
+script = ExtResource("2_mj1jq")
+ammoSprite = ExtResource("1_i5mu0")
+name = "Blueberry"
+metadata/_custom_type_script = "uid://bl76tqpf01ejt"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AmmoResource" load_steps=3 format=3 uid="uid://cencf51sej0q1"]
+
+[ext_resource type="Texture2D" uid="uid://orsrun4axckp" path="res://assets/sprites/ammo/egg.png" id="1_kl1v6"]
+[ext_resource type="Script" uid="uid://bl76tqpf01ejt" path="res://resource/ammo/AmmoResource.cs" id="1_ku56s"]
+
+[resource]
+script = ExtResource("1_ku56s")
+ammoSprite = ExtResource("1_kl1v6")
+name = "Egg"
+metadata/_custom_type_script = "uid://bl76tqpf01ejt"

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://cbtheass4g4wi"]
+[gd_resource type="Theme" load_steps=24 format=3 uid="uid://cbtheass4g4wi"]
 
 [ext_resource type="FontFile" uid="uid://bj7akg2jwrbdm" path="res://assets/fonts/default.ttf" id="1_pwn42"]
 [ext_resource type="Texture2D" uid="uid://c1qe78nvs4law" path="res://assets/UI/button square hover small.png" id="2_dvwpx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cjlntldqr74lt" path="res://assets/UI/arrow down small.png" id="4_k3s7a"]
 [ext_resource type="Texture2D" uid="uid://bggfpetx3iwxo" path="res://assets/UI/button square clicked small.png" id="4_kfuif"]
 [ext_resource type="Texture2D" uid="uid://cao3csfc30lsi" path="res://assets/UI/icon panel big medium.png" id="7_a4kax"]
+[ext_resource type="Texture2D" uid="uid://cf6qpxlgww708" path="res://assets/UI/button square hover.png" id="7_dvwpx"]
 [ext_resource type="Texture2D" uid="uid://qbm3ihhitdcd" path="res://assets/UI/checkbox checked small.png" id="8_dvwpx"]
 [ext_resource type="Texture2D" uid="uid://bra3irlktjw1l" path="res://assets/UI/checkbox empty small.png" id="9_hgrvu"]
 
@@ -63,6 +64,13 @@ texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 modulate_color = Color(0.47397572, 0.47397572, 0.47397572, 1)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ij6yh"]
+texture = ExtResource("7_dvwpx")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfuif"]
 bg_color = Color(0.49803922, 0.11764706, 0.13333334, 1)
 
@@ -102,6 +110,8 @@ OptionButton/icons/arrow = ExtResource("4_k3s7a")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_2km33")
 PanelContainerDark/base_type = &"PanelContainer"
 PanelContainerDark/styles/panel = SubResource("StyleBoxTexture_dvwpx")
+PanelContainerWhite/base_type = &"PanelContainer"
+PanelContainerWhite/styles/panel = SubResource("StyleBoxTexture_ij6yh")
 PopupMenu/icons/radio_checked = ExtResource("8_dvwpx")
 PopupMenu/icons/radio_unchecked = ExtResource("9_hgrvu")
 PopupMenu/styles/panel = SubResource("StyleBoxFlat_kfuif")

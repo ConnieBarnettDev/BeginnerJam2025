@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs1pk5oa7lwuh"]
+[gd_scene load_steps=7 format=3 uid="uid://cs1pk5oa7lwuh"]
 
 [ext_resource type="Script" uid="uid://mq07vrj1duvx" path="res://scenes/manager/GameManager.cs" id="1_l52tp"]
 [ext_resource type="PackedScene" uid="uid://coqvtxnsjvq7y" path="res://scenes/UI/pause_menu.tscn" id="2_l78bi"]
 [ext_resource type="Theme" uid="uid://cbtheass4g4wi" path="res://resource/default_theme.tres" id="3_0m4fk"]
 [ext_resource type="Texture2D" uid="uid://lgwrysr68fjb" path="res://assets/sprites/empty.png" id="4_gehpc"]
+[ext_resource type="PackedScene" uid="uid://binp8vt0v3ux7" path="res://scenes/UI/slot_machine.tscn" id="5_y757v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gehpc"]
 bg_color = Color(0.17254902, 0.64705884, 0.15294118, 1)
@@ -16,6 +17,7 @@ corner_detail = 6
 [node name="GameManager" type="Node"]
 script = ExtResource("1_l52tp")
 pauseMenuScene = ExtResource("2_l78bi")
+slotMachineScene = ExtResource("5_y757v")
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
@@ -59,6 +61,7 @@ value = 100.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="GameUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="AmmoLabel" type="Label" parent="GameUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2

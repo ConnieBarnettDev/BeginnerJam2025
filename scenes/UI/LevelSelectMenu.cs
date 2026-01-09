@@ -4,12 +4,7 @@ using System.Collections.Generic;
 
 namespace Game.UI;
 
-/*
-	Ilikely will have to delete this file but I want to keep the
-	"new run" and "continue" functionality
-
-	maybe I should add new run and continue to Main menu instead
-*/
+//INACTIVE
 
 public partial class LevelSelectMenu : CanvasLayer
 {

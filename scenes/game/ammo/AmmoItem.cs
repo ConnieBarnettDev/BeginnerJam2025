@@ -23,7 +23,7 @@ public partial class AmmoItem : Node2D
     {
         if(body.Name == "Player")
 		{
-			GameManager.ChangeAmmoSprite(ammoResource.ammoSprite);
+			GameManager.ChangeAmmoSprite(ammoResource);
 		}
     }
 

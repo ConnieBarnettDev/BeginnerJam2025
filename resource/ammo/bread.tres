@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AmmoResource" load_steps=3 format=3 uid="uid://vxgltyf7baxo"]
+
+[ext_resource type="Texture2D" uid="uid://bmd7trssp05r3" path="res://assets/sprites/ammo/bread.png" id="1_ilmx4"]
+[ext_resource type="Script" uid="uid://bl76tqpf01ejt" path="res://resource/ammo/AmmoResource.cs" id="2_bk823"]
+
+[resource]
+script = ExtResource("2_bk823")
+ammoSprite = ExtResource("1_ilmx4")
+name = "Bread"
+metadata/_custom_type_script = "uid://bl76tqpf01ejt"

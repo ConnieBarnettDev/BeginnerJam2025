@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bagnknqw4ks7h"
-path="res://.godot/imported/cheese.png-251e6d52b2ce5c177057bb720ad447eb.ctex"
+uid="uid://myomo6r4nk0j"
+path="res://.godot/imported/cherry.png-2e0167927bf97297d6ab5e92f3f396f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cheese.png"
-dest_files=["res://.godot/imported/cheese.png-251e6d52b2ce5c177057bb720ad447eb.ctex"]
+source_file="res://assets/sprites/ammo/cherry.png"
+dest_files=["res://.godot/imported/cherry.png-2e0167927bf97297d6ab5e92f3f396f2.ctex"]
 
 [params]
 

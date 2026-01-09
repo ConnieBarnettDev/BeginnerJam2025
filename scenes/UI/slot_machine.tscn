@@ -1,0 +1,154 @@
+[gd_scene load_steps=26 format=3 uid="uid://binp8vt0v3ux7"]
+
+[ext_resource type="Script" uid="uid://1akxtl06v36p" path="res://scenes/UI/SlotMachine.cs" id="1_em7a6"]
+[ext_resource type="Theme" uid="uid://cbtheass4g4wi" path="res://resource/default_theme.tres" id="1_lin0s"]
+[ext_resource type="Resource" uid="uid://cgtvhc34m8rqo" path="res://resource/ammo/apple.tres" id="2_b0o26"]
+[ext_resource type="Texture2D" uid="uid://bagnknqw4ks7h" path="res://assets/sprites/ammo/cheese.png" id="2_em7a6"]
+[ext_resource type="Resource" uid="uid://c3msu0v73apmd" path="res://resource/ammo/blueberry.tres" id="3_n24ko"]
+[ext_resource type="Resource" uid="uid://vxgltyf7baxo" path="res://resource/ammo/bread.tres" id="4_iri3e"]
+[ext_resource type="Resource" uid="uid://bsshbd13tisy7" path="res://resource/ammo/carrot.tres" id="5_vj2yo"]
+[ext_resource type="Resource" uid="uid://dgiimsw7bl0l3" path="res://resource/ammo/cheese.tres" id="6_ihum8"]
+[ext_resource type="Resource" uid="uid://b43fbmfdvlco6" path="res://resource/ammo/cherry.tres" id="7_e0q00"]
+[ext_resource type="Resource" uid="uid://dxrsabdom86xi" path="res://resource/ammo/corn.tres" id="8_fa0v8"]
+[ext_resource type="Resource" uid="uid://cencf51sej0q1" path="res://resource/ammo/egg.tres" id="9_jnl84"]
+[ext_resource type="Resource" uid="uid://ntjh0juytj5f" path="res://resource/ammo/fish.tres" id="10_iber5"]
+[ext_resource type="Resource" uid="uid://bhnot0ci76yjt" path="res://resource/ammo/grape.tres" id="11_a1vqx"]
+[ext_resource type="Resource" uid="uid://ftqr86hbd6se" path="res://resource/ammo/lemon.tres" id="12_8hk54"]
+[ext_resource type="Resource" uid="uid://8cmc4ld7vvo" path="res://resource/ammo/lime.tres" id="13_ed3u2"]
+[ext_resource type="Resource" uid="uid://brdlfaoll1q70" path="res://resource/ammo/milk.tres" id="14_bu5n4"]
+[ext_resource type="Resource" uid="uid://dirmyj4a4te5" path="res://resource/ammo/mushroom.tres" id="15_jw8q7"]
+[ext_resource type="Resource" uid="uid://dbxmebmda36y8" path="res://resource/ammo/peach.tres" id="16_2q1m4"]
+[ext_resource type="Resource" uid="uid://3wyappt2pjcq" path="res://resource/ammo/pepper.tres" id="17_4xn20"]
+[ext_resource type="Resource" uid="uid://cbvap77n5v6v8" path="res://resource/ammo/potato.tres" id="18_4hih2"]
+[ext_resource type="Resource" uid="uid://s2ex4qkksgwn" path="res://resource/ammo/sunflower.tres" id="19_j5vd1"]
+[ext_resource type="Resource" uid="uid://dmcgww061hjt2" path="res://resource/ammo/tea.tres" id="20_yimea"]
+[ext_resource type="Resource" uid="uid://b5csg1krr827j" path="res://resource/ammo/tomato.tres" id="21_k0ku4"]
+
+[sub_resource type="Animation" id="Animation_em7a6"]
+resource_name = "spin_wheel"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.6, 1.7666667, 1.9333333, 2.1, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}, {
+"args": [],
+"method": &"SetRandomAmmoTexture"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.4, 30),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"PlaySpinAudio"
+}, {
+"args": [],
+"method": &"PlayFanfareAudio"
+}, {
+"args": [],
+"method": &"PlayFanfareAudio"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rvdb"]
+_data = {
+&"spin_wheel": SubResource("Animation_em7a6")
+}
+
+[node name="SlotMachine" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_em7a6")
+ammos = Array[Object]([ExtResource("2_b0o26"), ExtResource("3_n24ko"), ExtResource("4_iri3e"), ExtResource("5_vj2yo"), ExtResource("6_ihum8"), ExtResource("7_e0q00"), ExtResource("8_fa0v8"), ExtResource("9_jnl84"), ExtResource("10_iber5"), ExtResource("11_a1vqx"), ExtResource("12_8hk54"), ExtResource("13_ed3u2"), ExtResource("14_bu5n4"), ExtResource("15_jw8q7"), ExtResource("16_2q1m4"), ExtResource("17_4xn20"), ExtResource("18_4hih2"), ExtResource("19_j5vd1"), ExtResource("20_yimea"), ExtResource("21_k0ku4")])
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = -140.00002
+offset_top = -140.00002
+offset_right = -84.000015
+offset_bottom = -84.000015
+scale = Vector2(5, 5)
+theme = ExtResource("1_lin0s")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_type_variation = &"PanelContainerWhite"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_em7a6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0rvdb")
+}

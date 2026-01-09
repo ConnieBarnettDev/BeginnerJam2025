@@ -8,9 +8,9 @@ public partial class MainMenu : Node
 	[Export]
 	private PackedScene optionsMenuScene;
 	[Export]
-	private PackedScene levelSelectMenuScene;
-	[Export]
 	private PackedScene creditsScene;
+	//[Export]
+	//private PackedScene levelSelectMenuScene;
 
 	private Button playButton;
 	private Button optionsButton;
@@ -41,6 +41,10 @@ public partial class MainMenu : Node
 
 	private void OnPlayButtonPressed()
 	{
+		LevelManager.StartRun();
+
+		/*
+		//LEVEL SELECT MENU
 		mainMenuContainer.Visible = false;
 		var levelSelect = levelSelectMenuScene.Instantiate<LevelSelectMenu>();
 		AddChild(levelSelect);
@@ -48,13 +52,16 @@ public partial class MainMenu : Node
 		{
 			OnLevelSelectBackPressed(levelSelect);
 		};
+		*/
 	}
 
+	/*
 	private void OnLevelSelectBackPressed(LevelSelectMenu levelSelect)
 	{
 		levelSelect.QueueFree();
 		mainMenuContainer.Visible = true;
 	}
+	*/
 
 	private void OnOptionsButtonPressed()
 	{

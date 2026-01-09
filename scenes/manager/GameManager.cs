@@ -1,6 +1,7 @@
 using Godot;
 using Game.UI;
 using Game.Autoload;
+using Game.Resources;
 
 namespace Game.Manager;
 
@@ -17,37 +18,41 @@ public partial class GameManager : Node
 	}
 
 	private readonly StringName ACTION_PAUSE = "pause";
+	private Vector2I SCREEN_MIDDLE; 
 
 	[Export]
 	private PackedScene pauseMenuScene;
-
-	// TO REMOVE
-	private string className;
-	private string difficultyName;
-	private string currentRunText;
-
+	[Export]
+	private PackedScene slotMachineScene;
+	
 	//UI
 	private static ProgressBar healthbar;
 	private static TextureRect ammoTextureRect;
+	private static CanvasLayer gameUI;
+	private static SlotMachine slotMachineInstance;
 
-	
 	//Ammo
 	public static bool isPaused { get; private set; } = false;
 	public static PackedScene ammoScene = GD.Load<PackedScene>("res://scenes/game/ammo/ammo.tscn");
 	public static PackedScene explosionScene = GD.Load<PackedScene>("res://scenes/game/ammo/explosion.tscn");
-	public static Texture2D ammoSprite;
+	public static AmmoResource currentAmmo;
 	public static int ammoSpeed { get; private set; } = 500;
 
 	public override void _Ready()
 	{
 		healthbar = GetNode<ProgressBar>("%HealthBar");
 		ammoTextureRect = GetNode<TextureRect>("%AmmoTextureRect");
+		gameUI = GetNode<CanvasLayer>("GameUI");
 
-		//TO REMOVE
-		className = LevelManager.currentClass.name;
-		difficultyName = LevelManager.currentDifficulty.name;
-		ApplyLevelSelectData();
-		ApplySaveData();
+		SCREEN_MIDDLE = new Vector2I(GetViewport().GetWindow().Size.X/2, GetViewport().GetWindow().Size.Y/2);
+		GD.Print(GetViewport().GetWindow().Size);
+		GD.Print(SCREEN_MIDDLE);
+
+
+		slotMachineInstance = slotMachineScene.Instantiate<SlotMachine>();
+		gameUI.AddChild(slotMachineInstance);
+		slotMachineInstance.Position = SCREEN_MIDDLE;
+		slotMachineInstance.Visible = false;
 	}
 
 	public override void _UnhandledInput(InputEvent evt)
@@ -73,17 +78,25 @@ public partial class GameManager : Node
 				};
 			}
 		}
+
+		if (evt is InputEventKey keyEvent && keyEvent.Pressed)
+    {
+        if (keyEvent.Keycode == Key.Space)
+        {
+            slotMachineInstance.Visible = true;
+        }
+    }
 	}
 
-	public static void ChangeAmmoSprite(Texture2D newSprite)
+	public static void ChangeAmmoSprite(AmmoResource newAmmo)
 	{
-		ammoSprite = newSprite;
-		ammoTextureRect.Texture = newSprite;
+		currentAmmo = newAmmo;
+		ammoTextureRect.Texture = currentAmmo.ammoSprite;
 	}
 
 	public static void FireAmmo(CharacterBody2D player)
 	{
-		if(ammoSprite == null) 
+		if(currentAmmo == null) 
 		{ 
 			GD.Print("Out of ammo!"); //TODO: in-game message
 			return; 
@@ -91,7 +104,7 @@ public partial class GameManager : Node
 
 		Ammo ammoInstance = ammoScene.Instantiate<Ammo>();
 		player.GetTree().Root.AddChild(ammoInstance);
-		ammoInstance.sprite.Texture = ammoSprite;
+		ammoInstance.sprite.Texture = currentAmmo.ammoSprite;
 		ammoInstance.Position = player.Position;
 		ammoInstance.LookAt(player.GetGlobalMousePosition());
 		ammoInstance.ApplyImpulse( 
@@ -114,33 +127,6 @@ public partial class GameManager : Node
 		isPaused = false;
 	}
 
-
-
-
-	//TO REMOVE
-
-	private void ApplyLevelSelectData()
-	{
-		//level select
-	}
-
-	private void ApplySaveData()
-	{
-		if (LevelManager.saveData != null)
-		{
-			//save data
-		}
-	}
-
-
-	private void OnTextEditTextChanged()
-	{
-		LevelManager.WriteSaveData(new SaveData(
-			"temp",
-			LevelManager.currentClass,
-			LevelManager.currentDifficulty
-		));
-	}
 
 
 }

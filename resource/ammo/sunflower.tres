@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AmmoResource" load_steps=3 format=3 uid="uid://s2ex4qkksgwn"]
+
+[ext_resource type="Texture2D" uid="uid://p5jq882br0l4" path="res://assets/sprites/ammo/sunflower.png" id="1_dgome"]
+[ext_resource type="Script" uid="uid://bl76tqpf01ejt" path="res://resource/ammo/AmmoResource.cs" id="1_pmc2u"]
+
+[resource]
+script = ExtResource("1_pmc2u")
+ammoSprite = ExtResource("1_dgome")
+name = "Sunflower"
+metadata/_custom_type_script = "uid://bl76tqpf01ejt"

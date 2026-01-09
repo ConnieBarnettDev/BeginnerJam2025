@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://beb5ciy4k7v47"]
+[gd_scene load_steps=9 format=3 uid="uid://beb5ciy4k7v47"]
 
 [ext_resource type="Script" uid="uid://rwl8t0nkhbap" path="res://scenes/autoload/AudioHelper.cs" id="1_cr1v0"]
 [ext_resource type="AudioStream" uid="uid://cks1qu6u4vr8c" path="res://assets/audio/click.mp3" id="2_h2ov4"]
+[ext_resource type="AudioStream" uid="uid://dkuefhvyfcnoj" path="res://assets/audio/wheel_spin.mp3" id="3_0mixs"]
 [ext_resource type="AudioStream" uid="uid://hpuaw4kfrm6x" path="res://assets/audio/music.mp3" id="3_cr1v0"]
+[ext_resource type="AudioStream" uid="uid://cgypojmfv50wr" path="res://assets/audio/vibraphone_mystery.wav" id="4_gxppc"]
 [ext_resource type="AudioStream" uid="uid://cnj4bcxx4wi3r" path="res://assets/audio/laser_1.wav" id="4_h2ov4"]
 [ext_resource type="AudioStream" uid="uid://cvb7hf2i3qf1p" path="res://assets/audio/footsteps-boots-101657.wav" id="5_n3qos"]
 [ext_resource type="AudioStream" uid="uid://bw6315b8dmxga" path="res://assets/audio/subtle_knock.wav" id="5_yxbcx"]
@@ -12,6 +14,14 @@ script = ExtResource("1_cr1v0")
 
 [node name="ClickAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_h2ov4")
+bus = &"SFX"
+
+[node name="SpinAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_0mixs")
+bus = &"SFX"
+
+[node name="FanfareAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_gxppc")
 bus = &"SFX"
 
 [node name="MusicAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
@@ -27,7 +37,7 @@ bus = &"SFX"
 
 [node name="HitAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_yxbcx")
-volume_db = -6.058
+volume_db = -10.097
 bus = &"SFX"
 
 [node name="FootstepAudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]

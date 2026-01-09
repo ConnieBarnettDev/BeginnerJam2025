@@ -12,6 +12,8 @@ public partial class AudioHelper : Node
 	private AudioStreamPlayer2D hitAudioStreamPlayer;
 	private AudioStreamPlayer2D footstepAudioStreamPlayer;
 	private AudioStreamPlayer2D musicAudioStreamPlayer;
+	private AudioStreamPlayer2D spinAudioStreamPlayer;
+	private AudioStreamPlayer2D fanfareAudioStreamPlayer;
 
 	public override void _Notification(int what)
 	{
@@ -28,6 +30,8 @@ public partial class AudioHelper : Node
 		hitAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("HitAudioStreamPlayer");
 		footstepAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("FootstepAudioStreamPlayer");
 		musicAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("MusicAudioStreamPlayer");
+		spinAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("SpinAudioStreamPlayer");
+		fanfareAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("FanfareAudioStreamPlayer");
 
 		musicAudioStreamPlayer.Finished += OnMusicFinished;
 	}
@@ -63,6 +67,16 @@ public partial class AudioHelper : Node
 	public static void PlayHit()
 	{
 		Instance.hitAudioStreamPlayer.Play();
+	}
+
+	public static void PlaySpin()
+	{
+		Instance.spinAudioStreamPlayer.Play();
+	}
+
+	public static void PlayFanfare()
+	{
+		Instance.fanfareAudioStreamPlayer.Play();
 	}
 
 	public static void PlayFootsteps()

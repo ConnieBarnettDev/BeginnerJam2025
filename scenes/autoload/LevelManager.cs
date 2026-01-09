@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 namespace Game.Autoload;
 
 /*
-	Will need to change the structure of save obj to match
-	the new game
+	MOSTLY INACTIVE
+	Only active function is StartRun()
 */
 
 public partial class LevelManager : Node
@@ -45,6 +45,7 @@ public partial class LevelManager : Node
 		Instance.GetTree().ChangeSceneToFile(Instance.gameScenePath);
 	}
 
+	//INACTIVE
 	public static void StartRun(ClassData classData, DifficultyData difficultyData)
 	{
 		saveData = null;
@@ -54,6 +55,18 @@ public partial class LevelManager : Node
 		}
 		currentClass = classData;
 		currentDifficulty = difficultyData;
+		Instance.GetTree().ChangeSceneToFile(Instance.gameScenePath);
+	}
+
+	public static void StartRun()
+	{
+		saveData = null;
+		if (FileAccess.FileExists(SAVE_FILE_PATH))
+		{
+			DirAccess.RemoveAbsolute(SAVE_FILE_PATH);
+		}
+		currentClass = null;
+		currentDifficulty = null;
 		Instance.GetTree().ChangeSceneToFile(Instance.gameScenePath);
 	}
 
