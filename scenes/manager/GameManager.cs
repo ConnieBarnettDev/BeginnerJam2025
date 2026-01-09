@@ -2,6 +2,9 @@ using Godot;
 using Game.UI;
 using Game.Autoload;
 using Game.Resources;
+using System.Collections;
+using System.IO;
+using System;
 
 namespace Game.Manager;
 
@@ -24,12 +27,26 @@ public partial class GameManager : Node
 	private PackedScene pauseMenuScene;
 	[Export]
 	private PackedScene slotMachineScene;
+	[Export]
+	private PackedScene gameOverScene;
+	[Export]
+	private Node enemyParent;
+	private Node ammoParent;
+	[Export]
+	private Node2D[] Spawners;
+	[Export]
+	private PackedScene[] EnemyScenes;
 	
 	//UI
 	private static ProgressBar healthbar;
 	private static TextureRect ammoTextureRect;
 	private static CanvasLayer gameUI;
+	private static Label timerLabel;
+	private static Label scoreLabel;
 	private static SlotMachine slotMachineInstance;
+	private static Timer ammoChangeTimer;
+	private static Timer enemySpawnTimer;
+	private Random random = new Random();
 
 	//Ammo
 	public static bool isPaused { get; private set; } = false;
@@ -38,24 +55,64 @@ public partial class GameManager : Node
 	public static AmmoResource currentAmmo;
 	public static int ammoSpeed { get; private set; } = 500;
 
+    //Player
+	public static Vector2 playerPosition;
+	public static int playerCurrentHealth;
+	public static int playerMaxHealth = 100;
+	public static int playerScore = 0; 
+
 	public override void _Ready()
 	{
+		Engine.TimeScale = 1;
 		healthbar = GetNode<ProgressBar>("%HealthBar");
 		ammoTextureRect = GetNode<TextureRect>("%AmmoTextureRect");
+		ammoChangeTimer = GetNode<Timer>("AmmoChangeTimer");
+		enemySpawnTimer = GetNode<Timer>("EnemySpawnTimer");
+		timerLabel = GetNode<Label>("%TimerLabel");
 		gameUI = GetNode<CanvasLayer>("GameUI");
+		scoreLabel = GetNode<Label>("%ScoreLabel");
 
 		SCREEN_MIDDLE = new Vector2I(GetViewport().GetWindow().Size.X/2, GetViewport().GetWindow().Size.Y/2);
-		GD.Print(GetViewport().GetWindow().Size);
-		GD.Print(SCREEN_MIDDLE);
-
 
 		slotMachineInstance = slotMachineScene.Instantiate<SlotMachine>();
 		gameUI.AddChild(slotMachineInstance);
 		slotMachineInstance.Position = SCREEN_MIDDLE;
 		slotMachineInstance.Visible = false;
+		slotMachineInstance.Visible = true;
+
+		playerCurrentHealth = playerMaxHealth;
+		healthbar.Value = playerCurrentHealth;
+
+		ammoChangeTimer.Timeout += OnAmmoChangeTimerTimeout;
+		enemySpawnTimer.Timeout += OnEnemySpawnTimerTimeout;
 	}
 
-	public override void _UnhandledInput(InputEvent evt)
+    private void OnEnemySpawnTimerTimeout()
+    {
+        SpawnerEnemies();
+    }
+
+	private void SpawnerEnemies()
+	{
+		foreach(Node2D spawner in Spawners)
+		{
+			//random.Next(0, EnemyScenes.Length-1)
+			Enemy enemyInstance = EnemyScenes[0].Instantiate<Enemy>();
+			enemyParent.AddChild(enemyInstance);
+			enemyInstance.Position = spawner.Position;
+		}
+	}
+
+
+    public override void _Process(double delta)
+    {
+		if (!ammoChangeTimer.IsStopped())
+		{
+			timerLabel.Text = ((int)ammoChangeTimer.TimeLeft + 1).ToString();
+		}
+    }
+
+    public override void _UnhandledInput(InputEvent evt)
 	{
 		
 		if (evt.IsActionPressed(ACTION_PAUSE))
@@ -78,14 +135,6 @@ public partial class GameManager : Node
 				};
 			}
 		}
-
-		if (evt is InputEventKey keyEvent && keyEvent.Pressed)
-    {
-        if (keyEvent.Keycode == Key.Space)
-        {
-            slotMachineInstance.Visible = true;
-        }
-    }
 	}
 
 	public static void ChangeAmmoSprite(AmmoResource newAmmo)
@@ -97,13 +146,12 @@ public partial class GameManager : Node
 	public static void FireAmmo(CharacterBody2D player)
 	{
 		if(currentAmmo == null) 
-		{ 
-			GD.Print("Out of ammo!"); //TODO: in-game message
+		{  
 			return; 
 		}
 
 		Ammo ammoInstance = ammoScene.Instantiate<Ammo>();
-		player.GetTree().Root.AddChild(ammoInstance);
+		Instance.ammoParent.AddChild(ammoInstance);
 		ammoInstance.sprite.Texture = currentAmmo.ammoSprite;
 		ammoInstance.Position = player.Position;
 		ammoInstance.LookAt(player.GetGlobalMousePosition());
@@ -119,6 +167,47 @@ public partial class GameManager : Node
 		ammo.GetTree().Root.AddChild(explosionInstance);
 		explosionInstance.Position = ammo.Position;
 	}
+
+	public static void ResetAmmoChangeTimer()
+	{
+		ammoChangeTimer.Start();
+	}
+
+	public static void DamagePlayer(int damage)
+	{
+		playerCurrentHealth -= damage;
+		healthbar.Value = playerCurrentHealth;
+		AudioHelper.PlayOof();
+		if (playerCurrentHealth <= 0)
+		{
+			Instance.TriggerGameOver();
+		}
+	}
+
+	public static void AddScore(int increase)
+	{
+		playerScore += increase;
+		scoreLabel.Text = "Score: " + playerScore;
+	}
+
+	public static int GetAmmoDamage()
+	{
+		return currentAmmo.damage;
+	}
+
+	private void TriggerGameOver()
+	{
+		Engine.TimeScale = 0;
+		Node gameOverSceneInstance = gameOverScene.Instantiate<Node>();
+		gameUI.AddChild(gameOverSceneInstance);
+	}
+
+	private void OnAmmoChangeTimerTimeout()
+    {
+        slotMachineInstance.Visible = true;
+		ammoChangeTimer.Stop();
+		timerLabel.Text = "";
+    }
 
 	private void OnPauseMenuResumePressed(PauseMenu pauseMenu)
 	{

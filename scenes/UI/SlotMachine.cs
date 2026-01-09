@@ -12,6 +12,7 @@ public partial class SlotMachine : Control
 	private AmmoResource[] ammos;
 	private Texture2D ammoTexture;
 	private TextureRect textureRect;
+	private Label nameLabel;
 	private AnimationPlayer animationPlayer;
 	private AmmoResource spinResult;
 	private Random random = new Random();
@@ -20,6 +21,7 @@ public partial class SlotMachine : Control
 	{
 		textureRect = GetNode<TextureRect>("%TextureRect");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		nameLabel = GetNode<Label>("NameLabel");
 
 		VisibilityChanged += OnVisibilityChanged;
 	}
@@ -41,6 +43,18 @@ public partial class SlotMachine : Control
 	private void SetRandomAmmoTexture()
 	{
 		textureRect.Texture = randomAmmo().ammoSprite;
+	}
+
+	private void SetSpinResultTexture()
+	{
+		textureRect.Texture = spinResult.ammoSprite;
+		nameLabel.Text = spinResult.name + "!";
+		GameManager.ChangeAmmoSprite(spinResult);
+	}
+
+	private void ResetTimer()
+	{
+		GameManager.ResetAmmoChangeTimer();
 	}
 
 	private void PlaySpinAudio()

@@ -14,6 +14,8 @@ public partial class AudioHelper : Node
 	private AudioStreamPlayer2D musicAudioStreamPlayer;
 	private AudioStreamPlayer2D spinAudioStreamPlayer;
 	private AudioStreamPlayer2D fanfareAudioStreamPlayer;
+	private AudioStreamPlayer2D enemyDeathSoundsAudioStreamPlayer;
+	private AudioStreamPlayer2D oofAudioStreamPlayer;
 
 	public override void _Notification(int what)
 	{
@@ -32,6 +34,8 @@ public partial class AudioHelper : Node
 		musicAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("MusicAudioStreamPlayer");
 		spinAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("SpinAudioStreamPlayer");
 		fanfareAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("FanfareAudioStreamPlayer");
+		enemyDeathSoundsAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("EnemyDeathSoundsAudioStreamPlayer");
+		oofAudioStreamPlayer = GetNode<AudioStreamPlayer2D>("OofAudioStreamPlayer");
 
 		musicAudioStreamPlayer.Finished += OnMusicFinished;
 	}
@@ -77,6 +81,16 @@ public partial class AudioHelper : Node
 	public static void PlayFanfare()
 	{
 		Instance.fanfareAudioStreamPlayer.Play();
+	}
+
+	public static void PlayEnemyDeathSound()
+	{
+		Instance.enemyDeathSoundsAudioStreamPlayer.Play();
+	}
+
+	public static void PlayOof()
+	{
+		Instance.oofAudioStreamPlayer.Play();
 	}
 
 	public static void PlayFootsteps()

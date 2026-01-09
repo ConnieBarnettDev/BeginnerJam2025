@@ -1,9 +1,8 @@
 using Game.Manager;
 using Game.Autoload;
 using Godot;
-using System;
 
-namespace Game.Player;
+namespace Game;
 
 public partial class Player : CharacterBody2D
 {
@@ -71,6 +70,8 @@ public partial class Player : CharacterBody2D
 				counter--;
 			}
 		}
+
+		GameManager.playerPosition = Position;
     }
 
 

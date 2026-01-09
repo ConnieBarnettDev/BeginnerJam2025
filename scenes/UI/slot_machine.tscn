@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://binp8vt0v3ux7"]
+[gd_scene load_steps=27 format=3 uid="uid://binp8vt0v3ux7"]
 
 [ext_resource type="Script" uid="uid://1akxtl06v36p" path="res://scenes/UI/SlotMachine.cs" id="1_em7a6"]
 [ext_resource type="Theme" uid="uid://cbtheass4g4wi" path="res://resource/default_theme.tres" id="1_lin0s"]
@@ -34,8 +34,8 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.6, 1.7666667, 1.9333333, 2.1, 2.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.6, 1.7666667, 1.9333333, 2.1666667, 2.4, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"SetRandomAmmoTexture"
@@ -95,7 +95,10 @@ tracks/0/keys = {
 "method": &"SetRandomAmmoTexture"
 }, {
 "args": [],
-"method": &"SetRandomAmmoTexture"
+"method": &"SetSpinResultTexture"
+}, {
+"args": [],
+"method": &"ResetTimer"
 }]
 }
 tracks/1/type = "method"
@@ -118,9 +121,37 @@ tracks/1/keys = {
 "method": &"PlayFanfareAudio"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_b0o26"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0rvdb"]
 _data = {
+&"RESET": SubResource("Animation_b0o26"),
 &"spin_wheel": SubResource("Animation_em7a6")
 }
 
@@ -132,11 +163,11 @@ ammos = Array[Object]([ExtResource("2_b0o26"), ExtResource("3_n24ko"), ExtResour
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = -140.00002
-offset_top = -140.00002
-offset_right = -84.000015
-offset_bottom = -84.000015
-scale = Vector2(5, 5)
+offset_left = -84.0
+offset_top = -319.0
+offset_right = -28.0
+offset_bottom = -263.0
+scale = Vector2(3, 3)
 theme = ExtResource("1_lin0s")
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer"]
@@ -147,6 +178,15 @@ theme_type_variation = &"PanelContainerWhite"
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("2_em7a6")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -54.0
+offset_top = -151.0
+offset_right = 54.0
+offset_bottom = -106.0
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

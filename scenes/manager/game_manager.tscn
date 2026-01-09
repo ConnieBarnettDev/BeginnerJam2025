@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs1pk5oa7lwuh"]
+[gd_scene load_steps=8 format=3 uid="uid://cs1pk5oa7lwuh"]
 
 [ext_resource type="Script" uid="uid://mq07vrj1duvx" path="res://scenes/manager/GameManager.cs" id="1_l52tp"]
 [ext_resource type="PackedScene" uid="uid://coqvtxnsjvq7y" path="res://scenes/UI/pause_menu.tscn" id="2_l78bi"]
 [ext_resource type="Theme" uid="uid://cbtheass4g4wi" path="res://resource/default_theme.tres" id="3_0m4fk"]
+[ext_resource type="PackedScene" uid="uid://boi8mtpjioh07" path="res://scenes/UI/game_over.tscn" id="4_0kf65"]
 [ext_resource type="Texture2D" uid="uid://lgwrysr68fjb" path="res://assets/sprites/empty.png" id="4_gehpc"]
 [ext_resource type="PackedScene" uid="uid://binp8vt0v3ux7" path="res://scenes/UI/slot_machine.tscn" id="5_y757v"]
 
@@ -14,10 +15,13 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 corner_detail = 6
 
-[node name="GameManager" type="Node"]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("enemyParent", "Spawners")]
 script = ExtResource("1_l52tp")
 pauseMenuScene = ExtResource("2_l78bi")
 slotMachineScene = ExtResource("5_y757v")
+gameOverScene = ExtResource("4_0kf65")
+enemyParent = NodePath("Enemies")
+Spawners = []
 
 [node name="GameUI" type="CanvasLayer" parent="."]
 
@@ -72,3 +76,34 @@ unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("4_gehpc")
 expand_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="GameUI/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="GameUI"]
+unique_name_in_owner = true
+offset_left = 244.0
+offset_top = 64.0
+offset_right = 284.0
+offset_bottom = 87.0
+text = "30"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="GameUI"]
+offset_left = 227.0
+offset_top = 40.0
+offset_right = 302.0
+offset_bottom = 63.0
+text = "Next Roll:"
+
+[node name="AmmoChangeTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Enemies" type="Node" parent="."]

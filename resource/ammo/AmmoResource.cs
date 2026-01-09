@@ -9,6 +9,8 @@ namespace Game.Resources
         public Texture2D ammoSprite { get; private set; }
         [Export]
         public string name { get; private set; }
+        [Export]
+        public int damage { get; private set; } = 1;
     }
 
 }

@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://5j7jqh28d8ax"]
+
+[ext_resource type="Script" uid="uid://babla26dfnjhk" path="res://scenes/game/enemies/Enemy.cs" id="1_m83fb"]
+[ext_resource type="Texture2D" uid="uid://blpwxjrx7ua7b" path="res://assets/sprites/enemies/skeleton (1).png" id="2_nb7yw"]
+[ext_resource type="Texture2D" uid="uid://ccyuuu456ekbr" path="res://assets/sprites/enemies/skeleton (2).png" id="3_ybrai"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oiapt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nb7yw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ybrai")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_66pgv"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m83fb"]
+radius = 9.219544
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m83fb"]
+bg_color = Color(0, 0, 0, 0.5019608)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nb7yw"]
+bg_color = Color(1, 0, 0, 1)
+corner_detail = 1
+
+[node name="Enemy" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_m83fb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oiapt")
+autoplay = "default"
+frame = 1
+frame_progress = 0.24430685
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_66pgv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_m83fb")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -9.0
+offset_top = -13.0
+offset_right = 9.0
+offset_bottom = -12.0
+theme_override_styles/background = SubResource("StyleBoxFlat_m83fb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nb7yw")
+step = 1.0
+value = 100.0
+show_percentage = false
